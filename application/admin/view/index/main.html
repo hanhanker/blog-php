@@ -1,0 +1,9 @@
+{extend name="./common/base" /}
+{block name="js"}
+<script src="__AJS__/main.js?" type="text/javascript"></script>
+{/block}
+{block name="main"}
+<div class="wstmart-login-tips">
+    <p>您好，欢迎使用。 上次管理员登录的时间是 {:session('WST_STAFF.lastTime')} ，IP 是 {:session('WST_STAFF.lastIP')}</p>
+</div>	
+{/block}

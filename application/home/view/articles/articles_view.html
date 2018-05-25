@@ -1,0 +1,107 @@
+{extend name="./common/base"/}
+{block name='css'}
+<style type="text/css">
+    
+            #parent .cat-name{
+                font-size: 16px;
+            }
+
+            #parent .h-list li{
+                padding-left: 16px;
+            }
+</style>
+{/block}
+{block name="main"}
+    <!-- 头部 banner -->
+    <div class="banner" id="home">
+         {include file="./common/nav" /}
+        <div class="content-part">
+            <h1 class="title wow fadeInDown animated animated" data-wow-delay=".3s"><a href="index.html">Go Easy On</a></h1>
+            <span class="wow fadeInUp animated animated" data-wow-delay=".2s">Where do you want to be?</span>
+        </div>
+    </div>
+    <!--/start-inner-content-->
+    <!-- blog -->
+    <div class="help-right">
+        <div class="h-content">
+        </div>
+    </div>
+    <div class="blog">
+        <!-- container -->
+        <div class="container">
+            <div class="blog-info wow fadeInDown animated animated" data-wow-delay=".5s">
+                <h2 class="tittle">Our Article</h3>
+			</div>
+			<div class="blog-top-grids">
+				<div class="col-md-8 blog-top-left-grid">
+					<div class="left-blog">
+						<div class="blog-left">
+							<div class="blog-left-left wow fadeInRight animated animated" data-wow-delay=".5s">
+								<p>Posted By <a href="#">Admin</a> &nbsp;&nbsp; on June 2, 2016 &nbsp;&nbsp; <a href="#">Comments (10)</a></p>
+								<a href="single.html"><img src="images/b1.jpg" alt="" /></a>
+							</div>
+							<div class="blog-left-right wow fadeInRight animated animated" data-wow-delay=".5s">         
+
+                                {if isset($content)}
+                                <h1>{$content.articleTitle}</h1>
+                                <div class="cat-time">
+                                    <span>{$content.catName}　</span>发布于：{:date('Y-m-d',strtotime($content.createTime))}</div>
+                                <div class="n-content">
+                                    {:htmlspecialchars_decode($content.articleContent)}
+                                </div>
+                                {/if}
+							</div>
+							<div class="clearfix"> </div>
+						</div>
+
+					</div>
+					<nav>
+						<ul class="pagination wow fadeInRight animated animated" data-wow-delay=".5s">
+                             {if isset($page)}
+                            <div class="h-page">{$page}
+                                <div class='wst-clear'></div>
+                            </div>
+                            {/if}
+						</ul>
+					</nav>
+				</div>
+				<div class="col-md-4 blog-top-right-grid">
+					<div class="Categories">
+                <ol class="breadcrumb">
+                    <li class="">首页</li>
+                    <li class="">文章</li>
+                     {volist name="$bcNav" id="bc"}
+                     <li class="active">
+                        <a href="{:url('home/articles/nlist',['catId'=>$bc['catId']])}"> {$bc['catName']}</a> 
+                     </li>
+                     {/volist}
+
+                </ol>
+						<ul id="parent" >
+					        {volist name="$list" id="v" }
+					        <li class="wow fadeInLeft animated animated" data-wow-delay=".5s" style="background: 0 none;">
+					            <span class="cat-name">{$v['catName']}
+					            </span>
+					            <ul class="h-list">
+					                {volist name="$v['children']" id="v1" key="k1"}
+					                <a href="{:url('home/Articles/nList',['catId'=>$v1['catId']])}" class="wow fadeInLeft animated animated" data-wow-delay=".5s">
+					                    <li class="{if ($v1['catId']==$catId)}h-curr{/if}">{$v1['catName']}（{$v1['newsCount']}）</li>
+					                </a>
+					                {/volist}
+					            </ul>
+					        </li>
+					        {/volist}
+					    </ul>
+					</div>
+				</div>
+				<div class="clearfix"> </div>
+			</div>
+		</div>
+		<!-- //container -->
+	</div>
+	<!-- //blog -->
+<!--//end-inner-content-->
+{include file="./common/footer"}
+	 <!--copy-right-->
+
+{/block}

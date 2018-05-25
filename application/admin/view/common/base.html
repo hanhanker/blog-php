@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>后台管理中心</title>
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <link href="__AJS__/ligerui/skins/Aqua/css/ligerui-all.css?" rel="stylesheet" type="text/css" />
+    <link href="__ACSS__/style.css?" rel="stylesheet" type="text/css" />
+    <style>
+    div.error{
+        display: inline-block;
+        position: relative;
+        top:3px;
+    }
+    </style>
+    {block name="css"}{/block}
+    <script type="text/javascript">
+     //php信息配置
+     window.conf = {
+        "ROOT"      : "__ROOT__", 
+        "APP"       : "{:request()->root}", 
+        "STATIC"    : "__STATIC__", 
+        "SUFFIX"    : "{:config('url_html_suffix')}"
+    }
+    </script>
+    <script src="__PLUGINS__/jquery.min.js"></script>
+    <script src="__PLUGINS__/common.js"></script>
+
+    <script src="__AJS__/ligerui/js/ligerui.all.js" ></script>
+    <script src="__PLUGINS__/common.js" ></script>
+    <script src="__AJS__/common.js" ></script>
+
+
+
+    <script src='__PLUGINS__/layer/layer.js'></script>
+
+    <!-- 验证 -->
+    <script type="text/javascript" src="__PLUGINS__/validate/jquery.validate.min.js"></script>
+    <script type="text/javascript" src="__PLUGINS__/validate/additional-methods.min.js"></script> 
+    <script type="text/javascript" src="__PLUGINS__/validate/jquery.validate.extend.js"></script> 
+    <script type="text/javascript" src="__PLUGINS__/validate/zh-cn.js"></script> 
+   
+ 
+  
+</head>
+
+<body>
+    {block name="main"}{/block} 
+    <script>
+        function showImg(opt) {
+            layer.photos(opt);
+        }
+        function showBox(opts) {
+            return WST.open(opts);
+        }
+    </script>
+</body>
+
+</html>
+
+{block name="js"}{/block}

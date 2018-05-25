@@ -1,0 +1,57 @@
+{extend name="./common/base"}
+{block name="css"}
+    <link href="__ACSS__/login.css" rel="stylesheet" type="text/css" />
+{/block}
+
+{block name="main"}
+    <div class="wst-lo-center">
+        <div class="wst-lo">
+            <div class="wst-lo-left">
+                <img src='__AIMG__/left.png' height='300' />
+            </div>
+        </div>
+        <div class="wst-lo">
+            <form class="wst-lo-form" id="visiter">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="frame">
+                                <span class="loginname"></span>
+                                <input type='text' id='loginName' name="loginName" class='ipt text' value='admin'>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="frame">
+                                <span class="loginpwd"></span>
+                                <input type='password' id='loginPwd' name="loginPwd" class='ipt text'>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="frame" style='padding-right:0px;'>
+                                <span class="verifycode"></span>
+                                <input type='text' id='verifyCode' class='ipt text2'>
+                                <img id='verifyImg' src="{:url('admin/index/getVerify')}" onclick='javascript:getVerify(this)'>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan='2' align='center'>
+                            <div class="but">
+                                <input type='submit' value='登录'>
+                                <input type='reset' value='清除'>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+{/block}
+
+{block name="js"}
+    <script src="__AJS__/login.js" type="text/javascript"></script>
+{/block}

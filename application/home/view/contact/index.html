@@ -1,0 +1,267 @@
+{extend name="./common/base"/}
+{block name='css'}
+<style type="text/css">
+    #map-container{
+			width:80%;   
+			height:800px; 
+			padding: 10px;
+			background: #ccc;  
+			border: 1px solid #ccc;
+			margin: 0 auto;
+		}
+
+    #visiter .styled-input div.error{
+		position: absolute !important;
+		top:10px !important;
+		right: 10px !important;
+	}
+</style>
+{/block}
+{block name="main"}
+	<div class="banner" id="home">
+ {include file="./common/nav" /}
+			<div class="content-part">
+                    <h1 class="title wow fadeInDown animated animated" data-wow-delay=".3s"><a href="index.html">Go Easy On</a></h1>
+					 <span class="wow fadeInUp animated animated" data-wow-delay=".2s">Where do you want to be?</span>
+				
+
+            </div>
+ </div>	
+	<!--/start-inner-content-->
+		 <!--/contact-->
+	 <div class="section-contact" id="contact">
+	    <div class="wrap">
+           <div class="contact-main">
+				 <h2 class="tittle wow fadeInUp animated animated" data-wow-delay=".5s">Contact Me</h2>
+					<div class="col-md-6 contact-in wow slideInUp animated animated" data-wow-delay=".5s">
+						<h5>作者信息</h5>
+						<p class="para1">
+							Hello,everyone;
+
+						</p>
+						<div class="more-address wow slideInUp animated animated" data-wow-delay=".5s""> 
+								<address>
+								  <strong class="one">Address</strong><br>
+								  江苏-盐城 <br>
+								  中国<br>
+								  <abbr title="Phone">P :</abbr> 15380548977
+								</address>
+								<address>
+								  <strong class="one">My mail</strong><br>
+								  <a href="mailto:info@example.com">hanker@163.com</a>
+							   </address>
+						  </div>
+					</div>
+					   <div class="col-md-6 contact-grid">
+						    <form id="visiter">
+									<div class="styled-input wow slideInUp animated animated" data-wow-delay=".5s">
+									  <input id="username" type="text" name="username" class="ipt" />
+									  <label>Name</label>
+									  <span></span> </div>
+									<div class="styled-input wow slideInUp animated animated" data-wow-delay=".5s">
+									  <input id="useremail" type="text" name="useremail" class="ipt"/>
+									  <label>Email</label>
+									  <span></span> </div>
+									<div class="styled-input wow slideInUp animated animated" data-wow-delay=".5s">
+									  <input id="userphone" type="tel" name="userphone" class="ipt"/>
+									  <label>Phone</label>
+									  <span></span> </div>
+									<div class="styled-input wide wow slideInUp animated animated" data-wow-delay=".5s">
+									  <textarea id="userinfo" name="userinfo" class="ipt" type="textarea"></textarea > 
+									  <label>Message</label>
+									  <span></span> </div>
+										<div class="send wow shake animated animated" data-wow-delay=".5s">
+											<input type="submit" value="Send" >
+										</div>
+						     </form>
+					   </div>
+						<div class="clearfix"> </div>
+			      </div>
+			 </div>				  	<!--map-->
+		 </div>
+					<div class="map">
+					   <h3 class="tittle wow fadeInUp animated animated" data-wow-delay=".5s">Find Me</h3>
+						<div id="map-container">
+							
+						</div>
+					</div>
+			
+
+
+
+
+<!--//end-inner-content-->
+	{include file="./common/footer"}
+	 <!--copy-right-->
+
+
+{/block}
+
+ {block name="js"}
+<script src="__HJS__/bootstrap.js"></script>
+<script src="http://api.map.baidu.com/api?v=2.0&ak=Ta28brx7L3xElLwWYcTcimjUyIf7mfU5"></script>
+<script type="text/javascript" src="__PLUGINS__/validate/jquery.validate.min.js"></script>
+<script type="text/javascript" src="__PLUGINS__/validate/additional-methods.min.js"></script> 
+
+<script type="text/javascript" src="__PLUGINS__/validate/jquery.validate.extend.js"></script> 
+<script type="text/javascript" src="__PLUGINS__/validate/zh-cn.js"></script> 
+<script>
+	var map = '';
+	function baiduMap() {
+    map = new BMap.Map('map-container');//allmap为div标签的id
+    var point = new BMap.Point(120.31,32.84);// 
+    map.centerAndZoom(point, 8);//以point为中心，缩放级别为16
+    var navigationControl=new BMap.NavigationControl();
+    map.addControl(navigationControl);//添加导航控件，实现拖拽、平移、改变比例尺
+    map.enableScrollWheelZoom(true);//允许鼠标滚轮缩放
+    var scaleControl = new BMap.ScaleControl();
+    map.addControl(scaleControl);// 添加比例尺显示控件
+    var marker = new BMap.Marker(point); // 创建标注
+    map.addOverlay(marker); // 将标注添加到地图中
+    marker.setAnimation(BMAP_ANIMATION_BOUNCE); // 跳动的动画
+    var label = new BMap.Label('亲,作者在这里', {
+        offset : new BMap.Size(20, -10)
+    });
+    marker.setLabel(label);
+    label.setStyle({ 
+		color : "#000", 
+		fontSize : "14px", 
+		backgroundColor :"0.05",
+		border: '1px solid #3eaabf',
+		fontWeight: 'blod'
+		});
+
+    // 访问者定位
+
+    var myposition;  
+    var myposition_lng;  
+    var myposition_lat;  
+ 	var geolocation = new BMap.Geolocation();  
+ 	geolocation.getCurrentPosition(function(r){ 
+    if(this.getStatus() ==0){  
+    	//更换图标
+        var myIcon = new BMap.Icon("http://sandbox.runjs.cn/uploads/rs/269/px1iaa72/peoicon.png", new BMap.Size(15, 15)); //
+        var marker2 = new BMap.Marker(r.point, {
+            icon: myIcon
+        }); // 创建标注
+        map.addOverlay(marker2); // 将标注添加到地图中   
+        map.panTo(r.point);  //转到
+
+        myposition_lat=r.point.lat;  
+        myposition_lng=r.point.lng;  
+
+        var label2 = new BMap.Label('我的位置哦', {
+            offset: new BMap.Size(20, -10)
+        });
+        label2.setStyle({ 
+			color : "#000", 
+			fontSize : "14px", 
+			backgroundColor :"0.05",
+			border: '1px solid #00ccff',
+			fontWeight: 'blod'
+		});  
+
+        marker2.setLabel(label2);
+
+
+        //计算距离
+        var pointA = new BMap.Point(120.31,32.84);  // 创建点坐标A--作者
+	    var pointB = new BMap.Point(myposition_lng,myposition_lat);  // 创建点坐标B--访问者
+
+	    var distance = '您与作者距离是：'+(map.getDistance(pointA,pointB)).toFixed(2)+' 米。';  //获取两点距离,保留小数点后两位
+		var polyline = new BMap.Polyline([pointA,pointB], {strokeColor:"blue", strokeWeight:1, strokeOpacity:0.5});  //定义折线
+		map.addOverlay(polyline);     //添加折线到地图上
+
+		var cr = new BMap.CopyrightControl({anchor: BMAP_ANCHOR_TOP_RIGHT});   //设置版权控件位置
+		map.addControl(cr); //添加版权控件
+
+		var bs = map.getBounds();   //返回地图可视区域
+		cr.addCopyright({id: 1, content: "<a href='#' style='font-size:20px;'>"+distance+"</a>", bounds: bs});   
+		
+
+    }else {  
+        alert('failed'+this.getStatus());  
+    }          
+  },{enableHighAccuracy: true}) 
+
+}
+	baiduMap();
+
+	</script>
+	<script type="text/javascript">
+		$(function(){
+
+			function contact(){
+				var params = WST.getParams('.ipt');
+				console.log( params );
+
+				$.post(WST.U('home/contact/contact'),params,function(data,textStatus){
+		    		var json = WST.toJson(data);
+		    		console.log(json)
+		    		if(json.status>0){
+		    			WST.msg('提交成功', {icon: 6});
+
+		    		}else{
+		    			
+		    			WST.msg(json.msg, {icon: 5});
+		    		}
+	    		
+	    		});
+			}
+
+
+				function showProtocol(){
+					layer.open({
+					    type: 2,
+					    title: '用户注册协议',
+					    shadeClose: true,
+					    shade: 0.8,
+					    area: ['1000px', ($(window).height() - 50) +'px'],
+					    content: [WST.U('home/users/protocol')],
+					    btn: ['同意并注册'],
+					    yes: function(index, layero){
+					    	layer.close(index);
+					    }
+					});
+				}
+
+
+
+		
+				$("#visiter").validate({
+				    rules: {
+				      username: {
+				      	required: true,
+				        username: true,
+				        minlength: 2
+				      },
+
+				      useremail: {
+				        required: true,
+				        mail: true
+				      },
+				      userphone: {
+				      	 required: true,
+				      	 mobile: true
+				      },
+				      userinfo:{
+				      	 required: true,
+
+				      }
+				    },
+				    messages: {
+				      userinfo: {
+				       require :"请输入内容"
+				        }
+				     },
+				     submitHandler:function(form){
+			            alert("提交事件!");   
+			            contact()
+
+
+			        }
+			    });
+		});
+	</script>
+	{/block}
+

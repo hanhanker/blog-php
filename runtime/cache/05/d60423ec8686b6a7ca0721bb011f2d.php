@@ -1,0 +1,4 @@
+<?php
+//000000000000
+ exit();?>
+a:13:{i:0;a:3:{s:5:"catId";i:1;s:8:"parentId";i:0;s:7:"catName";s:12:"前端学习";}i:1;a:3:{s:5:"catId";i:2;s:8:"parentId";i:0;s:7:"catName";s:12:"后端学习";}i:2;a:3:{s:5:"catId";i:3;s:8:"parentId";i:0;s:7:"catName";s:12:"综合训练";}i:3;a:3:{s:5:"catId";i:4;s:8:"parentId";i:0;s:7:"catName";s:12:"休闲娱乐";}i:4;a:3:{s:5:"catId";i:10;s:8:"parentId";i:1;s:7:"catName";s:6:"jquery";}i:5;a:3:{s:5:"catId";i:11;s:8:"parentId";i:1;s:7:"catName";s:3:"vue";}i:6;a:3:{s:5:"catId";i:12;s:8:"parentId";i:1;s:7:"catName";s:7:"angular";}i:7;a:3:{s:5:"catId";i:13;s:8:"parentId";i:1;s:7:"catName";s:8:"html+css";}i:8;a:3:{s:5:"catId";i:20;s:8:"parentId";i:2;s:7:"catName";s:12:"后台语法";}i:9;a:3:{s:5:"catId";i:21;s:8:"parentId";i:2;s:7:"catName";s:8:"thinkphp";}i:10;a:3:{s:5:"catId";i:22;s:8:"parentId";i:2;s:7:"catName";s:8:"database";}i:11;a:3:{s:5:"catId";i:31;s:8:"parentId";i:3;s:7:"catName";s:6:"图片";}i:12;a:3:{s:5:"catId";i:32;s:8:"parentId";i:3;s:7:"catName";s:6:"动漫";}}
